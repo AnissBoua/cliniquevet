@@ -1,0 +1,12 @@
+ErrorDocument 403 /cliniquevet/view/error.php
+ErrorDocument 404 /cliniquevet/view/error.php
+ErrorDocument 405 /cliniquevet/view/error.php
+ErrorDocument 408 /cliniquevet/view/error.php
+ErrorDocument 500 /cliniquevet/view/error.php
+ErrorDocument 502 /cliniquevet/view/error.php
+ErrorDocument 504 /cliniquevet/view/error.php
+
+RewriteEngine On
+RewriteRule ^([^_]*)_([^_]*)\.html$ /cliniquevet/?p=$1&a=$2 [L]
+RewriteRule ^([^_]*)_([^_]*)_([^_]*)\.html$ /cliniquevet/?p=$1&a=$2&id=$3 [L]
+RewriteRule ^([^_]*)_([^_]*)_([^_]*)_([^_]*)_([^_]*)\.html$ /cliniquevet/?p=$1&a=$2&postid=$3&commentId=$4&vote=$5 [L]

@@ -6,11 +6,11 @@ final class Config
 {
     // Identifiants Database
     const
-    DB_HOST = 'localhost',
-    DB_NAME = 'myfakeclinique',
-    DB_USR = 'root',
-    DB_PWD = '',
+        DB_HOST = 'localhost',
+        DB_NAME = 'myfakeclinique',
+        DB_USR = 'root',
+        DB_PWD = '',
 
-    // Titre du site
-    SITE_NAME = 'Billet simple pour l\'Alaska';
+        // Titre du site
+        SITE_NAME = 'Clinique';
 }

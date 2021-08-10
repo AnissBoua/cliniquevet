@@ -24,6 +24,14 @@ class Blog
     return $oStmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
+  public function getAnimal($iOffset)
+  {
+    $oStmt = $this->oDb->prepare('SELECT * FROM animal ORDER BY id DESC LIMIT :offset');
+    $oStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
+    $oStmt->execute();
+    return $oStmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
 
   public function getById($iId)
   {
@@ -42,9 +50,9 @@ class Blog
   }
 
 
-	public function getComments()
-	{
-		$oStmt = $this->oDb->query("
+  public function getComments()
+  {
+    $oStmt = $this->oDb->query("
     SELECT Users.id,
            Comments.user_id,
            Comments.comment,
@@ -60,7 +68,7 @@ class Blog
     ORDER BY date DESC
        ");
     return $oStmt->fetchAll(\PDO::FETCH_OBJ);
-	}
+  }
 
 
   public function getAll()
@@ -69,9 +77,17 @@ class Blog
     return $oStmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
-  public function getAnimalAll()
+  public function getAnimalAll($userId)
   {
-    $oStmt = $this->oDb->query('SELECT * FROM animal ORDER BY id DESC');
+    $oStmt = $this->oDb->prepare('SELECT * FROM animal WHERE idowner = :userid ORDER BY id DESC');
+    $oStmt->bindValue(':userid', $userId, \PDO::PARAM_INT);
+    $oStmt->execute();
+    return $oStmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
+  public function getIdAnimalAll()
+  {
+    $oStmt = $this->oDb->query('SELECT * FROM animal');
     return $oStmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
@@ -88,8 +104,8 @@ class Blog
   public function login($sEmail, $sPassword)
   {
     $a = [
-      'email' 	  => $sEmail,
-      'password' 	=> md5($sPassword)
+      'email'     => $sEmail,
+      'password'   => md5($sPassword)
     ];
     $sSql = "SELECT * FROM Users WHERE email = :email AND password = :password";
     $oStmt = $this->oDb->prepare($sSql);
@@ -149,11 +165,11 @@ class Blog
   /* ========== INSERT ========== */
 
 
-	public function addComment(array $aData)
-	{
-		$oStmt = $this->oDb->prepare('INSERT INTO Comments (user_id, comment, post_id, date) VALUES(:user_id, :comment, :post_id, NOW())');
+  public function addComment(array $aData)
+  {
+    $oStmt = $this->oDb->prepare('INSERT INTO Comments (user_id, comment, post_id, date) VALUES(:user_id, :comment, :post_id, NOW())');
     return $oStmt->execute($aData);
-	}
+  }
 
 
   public function addUser($aData)
@@ -169,16 +185,12 @@ class Blog
     $oStmt->bindValue(':comment_id', $aData['comment_id'], \PDO::PARAM_INT);
     $oStmt->execute();
 
-    if ($oStmt->rowCount() > 0)
-    {
+    if ($oStmt->rowCount() > 0) {
       $oStmt = $this->oDb->prepare('INSERT INTO Votes (comment_id, user_id, post_id, vote) VALUES(:comment_id, :user_id, :post_id, 1) ');
       $oStmt->execute($aData);
       return true;
-    }
-    else
-    {
+    } else {
       throw new \Exception("Impossible de voter pour un commentaire qui n'existe pas");
-
     }
   }
 
@@ -214,6 +226,4 @@ class Blog
     $oStmt->bindParam(':user_id', $aData['user_id'], \PDO::PARAM_STR);
     return $oStmt->execute();
   }
-
-
 }

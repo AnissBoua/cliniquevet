@@ -15,7 +15,7 @@
 			<label for="birthdate">Animal birth date</label>
 			<input type="date" name="birthdate" id="birthdate" placeholder="">
 		</div>
-
+		<!-- remove select if can't use inputs -->
 		<select name="races" id="races-select">
 			<option value="">--Please choose an option--</option>
 			<?php foreach($this->idCatsRace as $idCatsRace) :?>

@@ -16,6 +16,13 @@
 			<input type="date" name="birthdate" id="birthdate" placeholder="">
 		</div>
 
+		<select name="races" id="races-select">
+			<option value="">--Please choose an option--</option>
+			<?php foreach($this->idCatsRace as $idCatsRace) :?>
+			<option value="<?=$idCatsRace->racename?>"><?=$idCatsRace->racename?></option>
+			<?php endforeach ?>
+		</select>
+
 		<div class="col s12">
 			<div class="input-field file-field">
 				<div class="btn">

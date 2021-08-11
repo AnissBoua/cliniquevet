@@ -134,8 +134,8 @@ class Admin extends Blog
 
   public function delete($iId)
   {
-    $oStmt = $this->oDb->prepare('DELETE FROM Posts WHERE id = :postId LIMIT 1');
-    $oStmt->bindParam(':postId', $iId, \PDO::PARAM_INT);
+    $oStmt = $this->oDb->prepare('DELETE FROM animal WHERE id = :animalId LIMIT 1');
+    $oStmt->bindParam(':animalId', $iId, \PDO::PARAM_INT);
     return $oStmt->execute();
   }
 

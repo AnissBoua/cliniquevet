@@ -91,6 +91,12 @@ class Blog
     return $oStmt->fetchAll(\PDO::FETCH_OBJ);
   }
 
+  public function getCatsRace()
+  {
+    $oStmt = $this->oDb->query('SELECT * FROM catsraces');
+    return $oStmt->fetchAll(\PDO::FETCH_OBJ);
+  }
+
 
   public function isAdmin($sEmail)
   {
@@ -155,7 +161,7 @@ class Blog
 
   public function getUserId($userId)
   {
-    $oStmt = $this->oDb->prepare('SELECT id FROM Users WHERE pseudo = :pseudo');
+    $oStmt = $this->oDb->prepare('SELECT * FROM Users WHERE pseudo = :pseudo');
     $oStmt->bindParam(':pseudo', $userId, \PDO::PARAM_STR);
     $oStmt->execute();
     return $oStmt->fetch(\PDO::FETCH_OBJ);

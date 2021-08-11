@@ -10,7 +10,7 @@
 				<ul class="right hide-on-med-and-down">
 
 					<li class="<?php echo ($_GET['a'] == "index") ? "active" : ""; ?>"><a href="<?= ROOT_URL ?>blog_index.html">Accueil</a></li>
-					<li class="<?php echo ($_GET['a'] == "chapters") ? "active" : ""; ?>"><a href="<?= ROOT_URL ?>blog_chapters.html">Chapitres</a></li>
+					<li class="<?php echo ($_GET['a'] == "chapters") ? "active" : ""; ?>"><a href="<?= ROOT_URL ?>blog_chapters.html">Animals</a></li>
 					<?php if (!empty($_SESSION['is_admin']) || !empty($_SESSION['is_user'])) : ?>
 						<li class="<?php echo ($_GET['a'] == "edit") ? "active" : ""; ?>"><a href="<?= ROOT_URL ?>admin_add_post.html">Add animal</a></li>
 					<?php endif ?>

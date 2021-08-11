@@ -18,6 +18,8 @@
           <th>Titre</th>
           <th>Date</th>
           <th>Owner</th>
+          <th>idOwner</th>
+
         </tr>
       </thead>
 
@@ -26,6 +28,7 @@
           <tr>
             <td><?= $idAnimal->animalname ?></td>
             <td>Born the <?= date('d/m/Y', strtotime($idAnimal->birthdate)); ?></td>
+            <td><?= $idAnimal->owner ?></td>
             <td><?= $idAnimal->idowner ?></td>
             <td>
               <?php require 'inc/control_buttons.php' ?>

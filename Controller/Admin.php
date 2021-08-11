@@ -14,7 +14,7 @@ class Admin extends Blog
       header('Location: blog_index.html');
     $getUserId = $this->oModel->getUserId(current($_SESSION));
 
-    $this->oUtil->idAnimal = $this->oModel->getAnimalAll($getUserId->id);
+    $this->oUtil->idAnimal = $this->oModel->getIdAnimalAll();
     $this->oUtil->getView('edit');
   }
 
@@ -65,6 +65,7 @@ class Admin extends Blog
   public function add()
   {
     $getUserId = $this->oModel->getUserId(current($_SESSION));
+    $this->oUtil->idCatsRace = $this->oModel->getCatsRace();
 
     if (!$this->userIsLogged())
       header('Location: blog_index.html');
@@ -76,7 +77,7 @@ class Admin extends Blog
         $this->oUtil->getModel('Admin');
         $this->oModel = new \BlogPhp\Model\Admin;
 
-        $aData = array('animalname' => $_POST['animalname'], 'birthdate' => $_POST['birthdate'], 'idowner' => $getUserId->id);
+        $aData = array('animalname' => $_POST['animalname'], 'birthdate' => $_POST['birthdate'], 'idowner' => $getUserId->id, 'owner' => $getUserId->pseudo);
         $this->oModel->add($aData);
 
         if (!empty($_FILES['image']['name'])) {

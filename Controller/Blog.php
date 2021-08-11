@@ -84,11 +84,10 @@ class Blog
 				// On obtient tous les posts puis on affiche la page chapters.php
 				public function chapters()
 				{
-					$getUserId = $this->oModel->getUserId(current($_SESSION));
-
-					$this->oUtil->idAnimal = $this->oModel->getAnimalAll($getUserId->id);
-
-
+					if (!empty(current($_SESSION))) {
+						$getUserId = $this->oModel->getUserId(current($_SESSION));
+						$this->oUtil->idAnimal = $this->oModel->getAnimalAll($getUserId->id);
+					}
 					$this->oUtil->getView('chapters');
 				}
 

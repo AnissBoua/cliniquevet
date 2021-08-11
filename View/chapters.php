@@ -4,7 +4,7 @@
 	<div class="container">
 		<h1 class="page-title">List of animals</h1>
 		<a href="<?= ROOT_URL ?>admin_add.html"><button class="btn blue darken-3 waves-effect waves-light">Add an animal</button></a>
-
+		<?php if (!empty($this->idAnimal)) : ?>
 		<?php foreach ($this->idAnimal as $idAnimal) : ?>
 			<div class="row">
 				<hr>
@@ -27,6 +27,7 @@
 				</div>
 			</div>
 		<?php endforeach ?>
+		<?php endif ?>
 	</div>
 </main>
 <?php require 'inc/footer.php' ?>

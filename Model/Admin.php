@@ -184,10 +184,11 @@ class Admin extends Blog
 
   public function add(array $aData)
   {
-    $oStmt = $this->oDb->prepare('INSERT INTO animal (animalname, birthdate, idowner) VALUES(:animalname, :birthdate, :idowner)');
+    $oStmt = $this->oDb->prepare('INSERT INTO animal (animalname, birthdate, idowner, owner) VALUES(:animalname, :birthdate, :idowner, :owner)');
     $oStmt->bindValue(':animalname', $aData['animalname'], \PDO::PARAM_STR);
     $oStmt->bindValue(':birthdate', $aData['birthdate'], \PDO::PARAM_STR);
     $oStmt->bindValue(':idowner', $aData['idowner'], \PDO::PARAM_INT);
+    $oStmt->bindValue(':owner', $aData['owner'], \PDO::PARAM_STR);
     return $oStmt->execute();
   }
 }
